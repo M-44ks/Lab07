@@ -4,7 +4,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - master
+  pull_request:
+    branches:
+      - master
 
 env:
   DOTNET_VERSION: 11.0.x

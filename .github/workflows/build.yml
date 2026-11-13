@@ -2,24 +2,12 @@ name: Build .NET project
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+
 env:
   DOTNET_VERSION: 11.0.x
-  PROJECT_PATH: ./Lab07.csproj
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Confirm runner
-        shell: bash
-        run: echo "Runner is ready"
-name: Build .NET project
-
-on:
-  workflow_dispatch:
-
-env:
-  DOTNET_VERSION: 10.0.x
   PROJECT_PATH: ./Lab07.csproj
 
 jobs:
@@ -47,20 +35,6 @@ jobs:
         shell: bash
         run: dotnet build "$PROJECT_PATH" --configuration Release --no-restore
 
-      - name: Run project
-        shell: bash
-        run: dotnet run --project "$PROJECT_PATH" --configuration Release --no-build      - name: Checkout repository
-        uses: actions/checkout@v4
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-      - name: Restore dependencies
-        shell: bash
-      - name: Build project
-        shell: bash
-        run: dotnet build "$PROJECT_PATH" --configuration Release --no-restore
-        run: dotnet restore "$PROJECT_PATH"
       - name: Run project
         shell: bash
         run: dotnet run --project "$PROJECT_PATH" --configuration Release --no-build
